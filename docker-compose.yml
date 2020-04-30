@@ -1,0 +1,24 @@
+version: "2.1"
+
+services:
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    networks:
+      - reverse-proxy
+      - mysqlnet
+    expose: 
+      - "3000/tcp"
+    volumes:
+      - /mnt/volumes/var_lib_grafana/data:/var/lib/grafana:Z
+      - /mnt/volumes/etc_grafana/data:/etc/grafana:Z
+      - /mnt/volumes/var_log_grafana/data:/var/log/grafana:Z
+
+networks:
+
+  reverse-proxy:
+    external: true
+
+  mysqlnet:
+    external: true
